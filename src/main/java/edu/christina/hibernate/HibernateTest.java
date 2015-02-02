@@ -6,8 +6,11 @@
 package edu.christina.hibernate;
 
 import edu.christina.dto.UserDetails;
+import java.util.Date;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -29,12 +32,38 @@ public class HibernateTest {
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
     public static void main(String[] args){ 
+        Session session = null;
+        Transaction tx= null;
         UserDetails user = new UserDetails();
-        user.setUserid(1);
-        user.setUsername("First User");
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();    
+        try{
+            session = sessionFactory.openSession();
+            tx= session.beginTransaction();
+            
+          
+            user.setUserid(1);
+            user.setUsername("First User");
+            user.setJoinedDate(new Date());
+            user.setAddress("Kathmandu");
+            user.setDescription("I am first user and i live in Kathmandu");
+            
+            session.save(user);
+           // session.persist(user);
+            tx.commit();   
+        }
+        catch(HibernateException ex)
+        {
+            if(tx != null)
+            tx.rollback();
+            ex.printStackTrace();
+        }
+        finally{
+            if(session!=null)
+                session.close();
+        }
+        
+        session = sessionFactory.openSession();
+        tx=session.beginTransaction();
+        user = (UserDetails)session.get(UserDetails.class, 1);
+        System.out.println("User retrieved is:"+user.toString());
     }
 }

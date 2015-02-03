@@ -6,6 +6,9 @@
 package edu.christina.dto;
 
 import java.util.Date;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,8 +34,19 @@ public class UserDetails{
     private String username; 
 
  
+   // @Embedded
+   // private Address address;
+    
     @Embedded
-    private Address address;
+    @AttributeOverrides({
+        @AttributeOverride(name="street",column=@Column(name="HOME_STREET")),
+        @AttributeOverride(name="city",column=@Column(name="HOME_CITY")),
+        @AttributeOverride(name="state",column=@Column(name="HOME_STATE")),
+        @AttributeOverride(name="pincode",column=@Column(name="HOME_PINCODE"))
+    })
+    private Address homeAddress;
+    @Embedded
+    private Address officeAddress;
     
     @Temporal(TemporalType.DATE)
     
@@ -43,13 +57,32 @@ public class UserDetails{
     @Lob
     private String description;
     
-       public Address getAddress() {
-        return address;
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
+    
+  
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
+
+    public Address getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
+    
+    
 
     public String getDescription() {
         return description;
@@ -96,9 +129,9 @@ public class UserDetails{
 
     @Override
     public String toString() {
-        return "UserDetails{" + "userid=" + userid + ", username=" + username + ", address=" + address + ", joinedDate=" + joinedDate + ", age=" + age + ", description=" + description + '}';
+        return "UserDetails{" + "userid=" + userid + ", username=" + username + ", homeAddress=" + homeAddress + ", officeAddress=" + officeAddress + ", joinedDate=" + joinedDate + ", age=" + age + ", description=" + description + '}';
     }
-
+    
  
     
     

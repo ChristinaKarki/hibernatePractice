@@ -32,7 +32,8 @@ public class HibernateTest {
                 configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
-    public static void main(String[] args){ 
+    
+        public static void main(String[] args){ 
         Session session = null;
         Transaction tx= null;
         UserDetails user = new UserDetails();
@@ -44,15 +45,24 @@ public class HibernateTest {
             user.setUserid(1);
             user.setUsername("First User");
             user.setJoinedDate(new Date());
-          //  user.setAddress("Kathmandu");
+        
             user.setDescription("I am first user and i live in Kathmandu");
-           Address address = new Address();
-           address.setStreet("100N 4th Street");
-           address.setCity("Fairfield");
-           address.setState("Iowa");
-           address.setPincode("52557");
-           user.setAddress(address);
-           session.save(user);
+            //WAS in third commit of embedded and embeddable but deleted in this fourth commit of multiple Addresses
+//           Address address = new Address();
+//           address.setStreet("100N 4th Street");
+//           address.setCity("Fairfield");
+//           address.setState("Iowa");
+//           address.setPincode("52557");
+//           user.setAddress(address);
+            Address address1 = new Address();
+            address1.setStreet("homeStreet1");
+            address1.setCity("homeCity1");
+            Address address2 = new Address();
+            address2.setStreet("homeStreet2");
+            address2.setCity("homeCity2");
+            user.setHomeAddress(address1);
+            user.setOfficeAddress(address2);
+            session.save(user);
            // session.persist(user);
             tx.commit();   
         }

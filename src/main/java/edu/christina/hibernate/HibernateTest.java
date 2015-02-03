@@ -5,6 +5,7 @@
  */
 package edu.christina.hibernate;
 
+import edu.christina.dto.Address;
 import edu.christina.dto.UserDetails;
 import java.util.Date;
 import org.hibernate.HibernateException;
@@ -43,10 +44,15 @@ public class HibernateTest {
             user.setUserid(1);
             user.setUsername("First User");
             user.setJoinedDate(new Date());
-            user.setAddress("Kathmandu");
+          //  user.setAddress("Kathmandu");
             user.setDescription("I am first user and i live in Kathmandu");
-            
-            session.save(user);
+           Address address = new Address();
+           address.setStreet("100N 4th Street");
+           address.setCity("Fairfield");
+           address.setState("Iowa");
+           address.setPincode("52557");
+           user.setAddress(address);
+           session.save(user);
            // session.persist(user);
             tx.commit();   
         }
@@ -58,7 +64,7 @@ public class HibernateTest {
         }
         finally{
             if(session!=null)
-                session.close();
+               session.close();
         }
         
         session = sessionFactory.openSession();

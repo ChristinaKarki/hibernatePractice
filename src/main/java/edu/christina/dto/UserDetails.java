@@ -6,11 +6,13 @@
 package edu.christina.dto;
 
 import java.util.Date;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -19,28 +21,33 @@ import javax.persistence.Transient;
  *
  * @author CKarki
  */
-@Entity(name="USER_DETAILS")
+@Entity
+@Table(name="USER_DETAILS")
 public class UserDetails{ 
     
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int userid;
     
     private String username; 
+
+ 
+    @Embedded
+    private Address address;
     
     @Temporal(TemporalType.DATE)
     
     private Date joinedDate;
     @Transient
     private int age;
-    private String address;
+   
     @Lob
     private String description;
-
-    public String getAddress() {
+    
+       public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -89,8 +96,10 @@ public class UserDetails{
 
     @Override
     public String toString() {
-        return "UserDetails{" + "userid=" + userid + ", username=" + username + ", joinedDate=" + joinedDate + ", age=" + age + ", address=" + address + ", description=" + description + '}';
+        return "UserDetails{" + "userid=" + userid + ", username=" + username + ", address=" + address + ", joinedDate=" + joinedDate + ", age=" + age + ", description=" + description + '}';
     }
+
+ 
     
     
    

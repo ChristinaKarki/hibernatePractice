@@ -6,9 +6,12 @@
 package edu.christina.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,9 +47,11 @@ public class UserDetails{
         @AttributeOverride(name="state",column=@Column(name="HOME_STATE")),
         @AttributeOverride(name="pincode",column=@Column(name="HOME_PINCODE"))
     })
-    private Address homeAddress;
-    @Embedded
-    private Address officeAddress;
+//    private Address homeAddress;
+//    @Embedded
+//    private Address officeAddress;
+    @ElementCollection
+    private Set<Address> listOfAddresses = new HashSet();
     
     @Temporal(TemporalType.DATE)
     
@@ -54,46 +59,17 @@ public class UserDetails{
     @Transient
     private int age;
    
-    @Lob
-    private String description;
-    
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
-    
-  
-    public Address getHomeAddress() {
-        return homeAddress;
-    }
+//    @Lob
+//    private String description;
 
-    public void setHomeAddress(Address homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public Address getOfficeAddress() {
-        return officeAddress;
-    }
-
-    public void setOfficeAddress(Address officeAddress) {
-        this.officeAddress = officeAddress;
+    public Set<Address> getListOfAddresses() {
+        return listOfAddresses;
     }
     
-    
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setListOfAddresses(Set<Address> listOfAddresses) {
+        this.listOfAddresses = listOfAddresses;
     }
     
-    
-
     public int getAge() {
         return age;
     }
@@ -127,13 +103,10 @@ public class UserDetails{
         this.username = username;
     }
 
-    @Override
-    public String toString() {
-        return "UserDetails{" + "userid=" + userid + ", username=" + username + ", homeAddress=" + homeAddress + ", officeAddress=" + officeAddress + ", joinedDate=" + joinedDate + ", age=" + age + ", description=" + description + '}';
-    }
+   
+   
     
  
     
     
-   
 }

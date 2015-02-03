@@ -46,7 +46,7 @@ public class HibernateTest {
             user.setUsername("First User");
             user.setJoinedDate(new Date());
         
-            user.setDescription("I am first user and i live in Kathmandu");
+//           user.setDescription("I am first user and i live in Kathmandu");
             //WAS in third commit of embedded and embeddable but deleted in this fourth commit of multiple Addresses
 //           Address address = new Address();
 //           address.setStreet("100N 4th Street");
@@ -60,8 +60,10 @@ public class HibernateTest {
             Address address2 = new Address();
             address2.setStreet("homeStreet2");
             address2.setCity("homeCity2");
-            user.setHomeAddress(address1);
-            user.setOfficeAddress(address2);
+          //  user.setHomeAddress(address1);
+          //  user.setOfficeAddress(address2);
+            user.getListOfAddresses().add(address1);
+            user.getListOfAddresses().add(address2);
             session.save(user);
            // session.persist(user);
             tx.commit();   
@@ -80,6 +82,6 @@ public class HibernateTest {
         session = sessionFactory.openSession();
         tx=session.beginTransaction();
         user = (UserDetails)session.get(UserDetails.class, 1);
-        System.out.println("User retrieved is:"+user.toString());
+       // System.out.println("User retrieved is:"+user.toString());
     }
 }

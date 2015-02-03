@@ -5,6 +5,8 @@
  */
 package edu.christina.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -54,7 +59,10 @@ public class UserDetails{
 //    private Address officeAddress;
     @ElementCollection
     @JoinTable(name="USER_ADDRESS", joinColumns=@JoinColumn(name="USER_ID"))
-    private Set<Address> listOfAddresses = new HashSet();
+//  private Set<Address> listOfAddresses = new HashSet();
+    @GenericGenerator(name = "hilo-gen",strategy = "hilo")
+    @CollectionId(columns =@Column(name="ADDRESS_ID") ,generator ="hilo-gen" ,type =@Type(type="long"))
+    private Collection<Address> listOfAddresses = new ArrayList<Address>();
     
     @Temporal(TemporalType.DATE)
     
@@ -66,14 +74,14 @@ public class UserDetails{
 //    @Lob
 //    private String description;
 
-    public Set<Address> getListOfAddresses() {
+    public Collection<Address> getListOfAddresses() {
         return listOfAddresses;
     }
-    
-    public void setListOfAddresses(Set<Address> listOfAddresses) {
+
+    public void setListOfAddresses(Collection<Address> listOfAddresses) {
         this.listOfAddresses = listOfAddresses;
     }
-    
+
     public int getAge() {
         return age;
     }

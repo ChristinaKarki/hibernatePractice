@@ -44,7 +44,7 @@ public class HibernateTest {
           
             user.setUserid(1);
             user.setUsername("First User");
-            user.setJoinedDate(new Date());
+//            user.setJoinedDate(new Date());
         
 //           user.setDescription("I am first user and i live in Kathmandu");
             //WAS in third commit of embedded and embeddable but deleted in this fourth commit of multiple Addresses

@@ -42,6 +42,8 @@ public class MappingTest {
         
         stu.getVehicle().add(vehicle1);
         stu.getVehicle().add(vehicle2);
+        vehicle1.setStudent(stu);
+        vehicle2.setStudent(stu);
         
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();

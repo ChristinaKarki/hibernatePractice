@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,6 +21,8 @@ public class Vehicle {
     @JoinColumn(name="VEHICLE_ID")
     private int vehicleId;
     private String vehicleName;
+    @ManyToOne
+    private Student student;
     public int getVehicleId() {
         return vehicleId;
     }
@@ -35,6 +38,16 @@ public class Vehicle {
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+    
+    
    
     
     

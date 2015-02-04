@@ -5,9 +5,12 @@
  */
 package edu.christina.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -20,8 +23,9 @@ public class Student {
     private int studentId;
     private String studentName;
     
-    @OneToOne
-    private Vehicle vehicle;
+   // @OneToOne
+    @OneToMany
+    private Collection<Vehicle> vehicle = new ArrayList<Vehicle>();
 
     public int getStudentId() {
         return studentId;
@@ -39,15 +43,15 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public Vehicle getVehicle() {
+    public Collection<Vehicle> getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(Vehicle vehicle) {
+    public void setVehicle(Collection<Vehicle> vehicle) {
         this.vehicle = vehicle;
     }
-    
-    
+
+
     
     
 }

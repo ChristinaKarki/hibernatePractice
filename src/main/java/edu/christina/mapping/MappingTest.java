@@ -34,15 +34,20 @@ public class MappingTest {
         Student stu = new Student();
         stu.setStudentName("Student Name");
        
-        Vehicle vehicle = new Vehicle();
-        vehicle.setVehicleName("Vehicle Name");
+        Vehicle vehicle1 = new Vehicle();
+        vehicle1.setVehicleName("Vehicle Name1");
         
-        stu.setVehicle(vehicle);
+        Vehicle vehicle2 = new Vehicle();
+        vehicle2.setVehicleName("Vehicle Name2");
+        
+        stu.getVehicle().add(vehicle1);
+        stu.getVehicle().add(vehicle2);
         
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(stu);
-        session.save(vehicle);
+        session.save(vehicle1);
+        session.save(vehicle2);
         tx.commit();
         session.close();
         

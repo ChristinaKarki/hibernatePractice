@@ -48,6 +48,8 @@
      
     <!-- Names the annotated entity class-->
     <mapping class="edu.christina.dto.UserDetails"/>
+    <mapping class="edu.christina.dto.Student"/>
+    <mapping class="edu.christina.dto.Vehicle"/>
 
     </session-factory>
 </hibernate-configuration>

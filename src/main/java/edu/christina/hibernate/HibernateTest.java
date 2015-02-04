@@ -23,9 +23,10 @@ import org.hibernate.service.ServiceRegistry;
  */
 public class HibernateTest {
       
-    private static final SessionFactory sessionFactory;
+        private static final SessionFactory sessionFactory;
 	private static final ServiceRegistry serviceRegistry; 
-	static {
+	
+        static {
         Configuration configuration = new Configuration();
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
